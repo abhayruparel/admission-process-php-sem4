@@ -1,1 +1,1 @@
-this is ther main page
+This folder contains complete student registration form working.
