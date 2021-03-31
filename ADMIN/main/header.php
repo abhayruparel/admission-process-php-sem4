@@ -78,7 +78,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     <li class="dropdown">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="../assets/images/users/hritik.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b></b> </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="../login/logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <li><a href="login/logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
                         <!-- /.dropdown-user -->
                     </li>
@@ -108,21 +108,21 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 
                     <li class="active">
-                        <a href="index.php" class="waves-effect">&nbsp;&nbsp;&nbsp; <b>Dashbord</b></a>
+                        <a href="index.php" class="waves-effect"><b>Dashbord</b></a>
                     </li>
 
 
                     <li class="active">
-                        <a href="display_counsellor_alloted.php" class="waves-effect">&nbsp;&nbsp;&nbsp; <b>Display counsellor alloted</b></a>
+                        <a href="display_counsellor_alloted.php" class="waves-effect"><b>Display counsellor alloted</b></a>
                     </li>
 
 
                     <li>
-                        <a href="display_students_enquiry.php" class="waves-effect">&nbsp;&nbsp;&nbsp; <b>Display Students inquiry</b></a>
+                        <a href="display_students_enquiry.php" class="waves-effect"><b>Display Students inquiry</b></a>
                     </li>
 
                     <li>
-                        <a href="display_counsellor.php" class="waves-effect">&nbsp;&nbsp;&nbsp; <b>Display counsellor</b></a>
+                        <a href="display_counsellor.php" class="waves-effect"><b>Display counsellor</b></a>
                     </li>
                     
                 </ul>

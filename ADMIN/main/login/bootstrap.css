@@ -2907,11 +2907,13 @@ select[multiple].input-lg {
   top: 0;
 }
 .help-block {
-  display: block;
+ 
   margin-top: 5px;
+     display: block;
   margin-bottom: 10px;
   color: #737373;
 }
+
 @media (min-width: 768px) {
   .form-inline .form-group {
     display: inline-block;
@@ -6754,4 +6756,5 @@ button.close {
     display: none !important;
   }
 }
+
 /*# sourceMappingURL=bootstrap.css.map */

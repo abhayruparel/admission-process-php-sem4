@@ -3,11 +3,16 @@
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$username = $password = $confirm_password = $name="";
+$username_err = $password_err = $confirm_password_err = $name_err="";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+    if(empty(trim($_POST["name"]))){
+        $name_err = "Please enter your name."; 
+    }else{
+        $name = trim($_POST["name"]);
+        }
  
     // Validate username
     if(empty(trim($_POST["username"]))){
@@ -60,7 +65,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $confirm_password_err = "Password did not match.";
         }
     }
-    $param_name = trim($_POST["name"]);
+    
+    
     // Check input errors before inserting in database
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
         
@@ -74,6 +80,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Set parameters
             $param_username = $username;
             $param_password = $password;
+            $param_name = $name;
            //$param_password=password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             
             // Attempt to execute the prepared statement
@@ -113,6 +120,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         
 
         .wrapper{ width: 350px; padding: 20px; margin: auto}
+        .star{
+            color:red;
+        }
     </style>
 </head>
 <body>
@@ -120,20 +130,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <h2>Sign Up</h2>
         <p>Please fill this form to create an account.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" id="form" method="post">
+            <div  class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
+            <label>Name <span class="star">*</span></label>
+                <input type="text" name="name" class="form-control" value="<?php echo $username; ?>">
+                <span class="help-block"><?php echo $name_err; ?></span>
+            </div>
             <div  class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Name :</label>
-                <input type="text" name="name" class="form-control">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+                <label>Username <span class="star">*</span></label>
+                <input type="email" name="username" class="form-control" value="<?php echo $username; ?>">
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>    
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password</label>
+                <label>Password <span class="star">*</span></label>
                 <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                <label>Confirm Password</label>
+                <label>Confirm Password <span class="star">*</span></label>
                 <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
             </div>

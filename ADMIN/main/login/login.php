@@ -4,7 +4,7 @@ session_start();
  
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-  header("location: ../main/index.php");
+    header("location: ../index.php");
     exit;
 }
  
@@ -13,7 +13,7 @@ require_once "config.php";
  
 // Define variables and initialize with empty values
 $username = $password = "";
-$username_err = $password_err = "";
+$username_err = $password_err =$stmt= "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -64,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $username;                            
                             
                             // Redirect user to welcome page
-                            header("location: ../main/index.php");
+                            header("location: ../index.php");
                         } else{
                             // Display an error message if password is not valid
                             $password_err = "The password or username you entered was not valid.";
@@ -79,7 +79,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }
 
             // Close statement
-            mysqli_stmt_close($stmt);
+            //mysqli_stmt_close($stmt);
         }
     
     
@@ -120,11 +120,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="password" name="password" class="form-control">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
-            <div class="form-group">
+             <div class="form-group">
                 <input type="submit" name="submit" class="btn btn-primary" value="Login">
-                 <a href="reset-password.php" class="btn btn-warning">forget password</a>
+                <!-- <a href="reset-password.php" class="btn btn-warning">forget password</a>-->
             </div>
-            <b> <p>Don't have an account? <a href="register.php">Sign up now</a>.</p></b>
+            <!--<b> <p>Don't have an account? <a href="register.php">Sign up now</a>.</p></b> -->
         </form>
     </div>    
 </body>

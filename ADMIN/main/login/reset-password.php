@@ -12,12 +12,17 @@ session_start();
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$new_password = $confirm_password = "";
-$new_password_err = $confirm_password_err = "";
+$new_password = $confirm_password = $username="";
+$new_password_err = $confirm_password_err =$username_err= "";
  
 // Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if(!empty($_POST["submit"])){
  
+    if(empty(trim($_POST["username"]))){
+        $username_err = "Please enter username.";
+    } else{
+        $username = trim($_POST["username"]);
+    }
     // Validate new password
     if(empty(trim($_POST["new_password"]))){
         $new_password_err = "Please enter the new password.";     
@@ -40,19 +45,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Check input errors before updating the database
     if(empty($new_password_err) && empty($confirm_password_err)){
         // Prepare an update statement
-        $sql = "UPDATE signup_data SET passwd = ? WHERE id = ?";
+     
+        // Prepare a select statement
+        $sql = "SELECT id, mail, passwd FROM signup_data WHERE mail = ? ";
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "si", $param_password, $param_id);
+            mysqli_stmt_bind_param($stmt, "s", $username);
             
             // Set parameters
-            $param_password = password_hash($new_password, PASSWORD_DEFAULT);
-            $param_id = $_SESSION["id"];
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                // Store result
+                mysqli_stmt_store_result($stmt);
+                
+                // Check if username exists, if yes then verify password
+                if(mysqli_stmt_num_rows($stmt) == 1){                    
+                   $sql = "UPDATE signup_data SET passwd = ? WHERE mail = ?";
+        
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "ss", $param_password, $param_username);
+            
+            // Set parameters
+            $param_password = $new_password;
+            $param_username = $username;//$_SESSION["id"];
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Password updated successfully. Destroy the session, and redirect to login page
+                require_once("mail_function.php");
+		          $staus=sendOTP($_POST["username"],$new_password);
                 session_destroy();
                 header("location: login.php");
                 exit();
@@ -63,11 +87,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Close statement
             mysqli_stmt_close($stmt);
         }
+                    
+                        } else{
+                            // Display an error message if password is not valid
+                            $username_err = "The  username you entered was not valid.";
+                        }
+                    }
+                } /*else{
+                    // Display an error message if username doesn't exist
+                    $username_err = "No account found with that username.";
+                }*/
+            }   
     }
     
     // Close connection
     mysqli_close($link);
-}
+
 ?>
  
 <!DOCTYPE html>
@@ -92,6 +127,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <h2>Reset Password</h2>
         <p>Please fill out this form to reset your password.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"> 
+            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                <label>username</label>
+                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+                <span class="help-block"><?php echo $username_err; ?></span>
+            </div>
             <div class="form-group <?php echo (!empty($new_password_err)) ? 'has-error' : ''; ?>">
                 <label>New Password</label>
                 <input type="password" name="new_password" class="form-control" value="<?php echo $new_password; ?>">
@@ -103,7 +143,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="submit" class="btn btn-primary" value="Submit" name="submit">
                 <a class="btn btn-link" href="login.php">Cancel</a>
             </div>
         </form>
