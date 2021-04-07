@@ -55,41 +55,55 @@ include("header.php");
 
 <div id="page-wrapper">
 
-
-    <!-- PHP CODE INTEGRATION display_counsellor_alloted.php-->
+    <!-- PHP CODE INTEGRATION display_student_query.php-->
     <?php
     $con = mysqli_connect("localhost", "root", "", "admission_process");
     if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
     }
 
-    $result = mysqli_query($con, "SELECT * FROM counsellor_master");
+    $result = mysqli_query($con, "SELECT * FROM student_query");
+    $result1 = mysqli_query($con, "SELECT * FROM admission_data");
+    $result2 = mysqli_query($con, "SELECT * FROM counsellor_alloted");
 
     echo "<table border='1' id='st'>
-        <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Gender</th>
-            <th>Contact number</th>
-            <th>Mail id</th>
-            <th>Counsellor ID</th>
-        </tr>";
+<tr>
+<th>Name</th>
+<th>Student Mail Id</th>
+<th>Query</th>
+<th>flag</th>
+<th>Student ID</th>
+<th>Counsellor ID</th>
+</tr>";
 
     while ($row = mysqli_fetch_array($result)) {
         echo "<tr>";
-        echo "<td>" . $row['couns_fname'] . "</td>";
-        echo "<td>" . $row['couns_lname'] . "</td>";
-        echo "<td>" . $row['couns_gender'] . "</td>";
-        echo "<td>" . $row['couns_contact_no'] . "</td>";
-        echo "<td>" . $row['couns_mail'] . "</td>";
-        echo "<td>" . $row['couns_id'] . "</td>";
-        echo "</tr>";
+        echo "<td>" . $row['name'] . "</td>";
+        echo "<td>" . $row['mail'] . "</td>";
+        echo "<td>" . $row['msg'] . "</td>";
+        echo "<td>" . $row['flag'] . "</td>";
+        while ($row1 = mysqli_fetch_array($result1)) {
+
+            if ($row['mail'] == $row1['stu_mail']) {
+                $studentIdAdmissionData = $row1['stu_id'];
+                //echo $studentIdAdmissionData;
+                echo "<td>" . $studentIdAdmissionData . "</td>";
+                if ($studentIdAdmissionData) {
+                    while ($row3 = mysqli_fetch_array($result2)) {
+                        if ($studentIdAdmissionData == $row3['stu_id']) {
+                            $couns_id = $row3['couns_alloted_id'];
+                            //echo "<p>" . $couns_id . "<p>";
+                            echo "<td>" . $couns_id . "</td>";
+                        }
+                    }
+                }
+            }
+        }
     }
     echo "</table>";
 
     mysqli_close($con);
     ?>
-    <!-- end of php code-->
 </div>
 
 <?php

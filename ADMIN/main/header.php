@@ -1,9 +1,9 @@
 <?php
 // Initialize the session
 session_start();
- 
+
 // Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: login.php");
     exit;
 }
@@ -13,6 +13,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 
 <!-- Mirrored from wrappixel.com/demos/admin-templates/maple-admin/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Jan 2019 04:45:28 GMT -->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -67,14 +68,16 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0">
             <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
                 <div class="top-left-part">
-                    <a class="logo" href="index.php"><b><img src="../assets/images/maple-icon.png" alt="Home"></b><span class="hidden-xs"><font>Admin</font></span></a>
+                    <a class="logo" href="index.php"><b><img src="../assets/images/maple-icon.png" alt="Home"></b><span class="hidden-xs">
+                            <font>Admin</font>
+                        </span></a>
                 </div>
                 <ul class="nav navbar-top-links navbar-left">
                     <li><a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i class="icon-arrow-left-circle ti-menu"></i></a></li>
-             
+
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
-                    
+
                     <li class="dropdown">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="../assets/images/users/hritik.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b></b> </a>
                         <ul class="dropdown-menu dropdown-user">
@@ -93,16 +96,18 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             <div class="sidebar-nav navbar-collapse ">
                 <ul class="nav" id="side-menu">
                     <li class="sidebar-search hidden-sm hidden-md hidden-lg">
-                       <!--  <div class="input-group custom-search-form">
+                        <!--  <div class="input-group custom-search-form">
                             <input type="text" class="form-control" placeholder="Search..."> <span class="input-group-btn">
             <button class="btn btn-default" type="button"> <i class="fa fa-search"></i> </button>
             </span> </div> -->
                         <!-- /input-group -->
                     </li>
-                    
 
 
-                    <li class="nav-small-cap"><!-- <b>Main Menu</b> --></li>
+
+                    <li class="nav-small-cap">
+                        <!-- <b>Main Menu</b> -->
+                    </li>
 
 
 
@@ -124,10 +129,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     <li>
                         <a href="display_counsellor.php" class="waves-effect"><b>Display counsellor</b></a>
                     </li>
-                    
+                    <li>
+                        <a href="display_studentQuries.php" class="waves-effect"><b>Student Quries</b></a>
+                    </li>
+
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
         </div>
         <!-- Page Content -->
- 
