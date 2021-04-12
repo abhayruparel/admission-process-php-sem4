@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <title>JavaScript Form Validation using a sample registration form</title>
+    <meta name="keywords" content="example, JavaScript Form Validation, Sample registration form" />
+    <meta name="description" content="This document is an example of JavaScript Form Validation using a sample registration form. " />
+    <script src="temp.js"></script>
+</head>
+<body onload="document.registration.fname.focus();">
+<h1>Registration Form</h1>
+Use tab keys to move from one input field to the next.
+<form name='registration' onSubmit="return formValidation();">
+    <ul>
+        <li><label for="fname">First Name:</label></li>
+        <li><input type="text" name="fname" size="12" /></li>
+        <li><label for="lname">Last Name:</label></li>
+        <li><input type="text" name="lname" size="12" /></li>
+        <li><label for="phone">Phone no:</label></li>
+        <li><input type="tel" name="mobile" size="50" /></li>
+        <li><label for="email">Email:</label></li>
+        <li><input type="text" name="email" size="50" /></li>
+        <li><label id="gender">Gender:</label></li>
+        <li><input type="radio" name="mgender" value="Male" /><span>Male</span></li>
+        <li><input type="radio" name="fgender" value="Female" /><span>Female</span></li>
+        <li><label id="dob">D.O.B:</label></li>
+        <li><input type="date" name="dob" /></li>
+        <li><label for="gname">Guardian Name:</label></li>
+        <li><input type="text" name="gname" size="12" /></li>
+        <li><label for="gphone">Guardian Phone no:</label></li>
+        <li><input type="tel" name="gmobile" size="50" /></li>
+        <li><label for="address">Address:</label></li>
+        <li><input type="text" name="address" size="50" /></li>
+        <li><label for="country">Country:</label></li>
+        <li><input type="text" name="country" /></li>
+        <li><label for="state">State:</label></li>
+        <li><input type="text" name="state" /></li>
+        <li><label for="city">City:</label></li>
+        <li><input type="text" name="city" /></li>
+        <li><label for="pin">PIN Code:</label></li>
+        <li><input type="text" name="pin" /></li>
+        <li><label for="degree">Degree:</label></li>
+        <li><select name="degree">
+            <option selected="" value="Default">(Please select a degree)</option>
+            <option value="B.Tech">B.Tech</option>
+            <option value="BCA">BCA</option>
+            <option value="B.Arch">B.Arch</option>
+        </select></li>
+        <li><label for="course">Course:</label></li>
+        <li><select name="course">
+            <option selected="" value="Default">(Please select a course)</option>
+            <option value="BDA">BDA</option>
+            <option value="CBA">CBA</option>
+            <option value="CS">CS</option>
+        </select></li>
+        <li><input type="submit" name="submit" value="Submit" /></li>
+    </ul>
+</form>
+</body>
+</html>

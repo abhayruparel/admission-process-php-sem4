@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <title>JavaScript Form Validation using a sample registration form</title>
+    <meta name="keywords" content="example, JavaScript Form Validation, Sample registration form" />
+    <meta name="description" content="This document is an example of JavaScript Form Validation using a sample registration form. " />
+    <script src="temp.js"></script>
+</head>
+<body onload="document.registration.fname.focus();">
+<h1>Registration Form</h1>
+Use tab keys to move from one input field to the next.
+<form name='registration' onSubmit="return formValidation();">
+    <ul>
+        <li><label for="name">Name:</label></li>
+        <li><input type="text" name="fname" size="12" /></li>
+        <li><label for="email">Email:</label></li>
+        <li><input type="text" name="email" size="50" /></li>
+        <li><label for="phone">Phone no:</label></li>
+        <li><input type="tel" name="mobile" size="50" /></li>
+        <li><select name="courses">
+            <option selected="" value="Default">(Please select a course)</option>
+            <option value="B.TECH">B.Tech UG </option>
+            <option value="M.TECH">M.TECH</option>
+            <option value="BCA">BCA</option>
+            <option value="MCA">MCA</option>
+            <option value="BCS/MSC">BSC/MSC</option>
+        </select></li>
+        <li><input type="submit" name="submit" value="Submit" /></li>
+    </ul>
+</form>
+</body>
+</html>
